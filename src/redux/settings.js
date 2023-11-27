@@ -7,8 +7,9 @@ export const settingsSlice = createSlice({
         n: 4,
         angle: 43,
         scalingFactor: 300,
+        iterations: 360,
         background: '#eee',
-        fill: '#333',
+        stroke: '#333',
         animation: true,
         rotation: true
     },
@@ -29,12 +30,16 @@ export const settingsSlice = createSlice({
             state.scalingFactor = action.payload;
         },
 
+        changeIterations: (state, action) => {
+            state.iterations = action.payload;
+        },
+
         changeBackground: (state, action) => {
             state.background = action.payload;
         },
 
-        changeFill: (state, action) => {
-            state.fill = action.payload;
+        changeStroke: (state, action) => {
+            state.stroke = action.payload;
         },
 
         toggleAnimation: (state, action) => {
@@ -47,5 +52,5 @@ export const settingsSlice = createSlice({
     }
 });
 
-export const { changeM, changeN, changeAngle, changeScalingFactor, changeBackground, changeFill, toggleAnimation, toggleRotation } = settingsSlice.actions;
+export const { changeM, changeN, changeAngle, changeScalingFactor, changeIterations, changeBackground, changeStroke, toggleAnimation, toggleRotation } = settingsSlice.actions;
 export default settingsSlice.reducer;
