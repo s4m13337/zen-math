@@ -4,10 +4,6 @@ import p5 from 'p5';
 
 function Canvas(){
     const parameters = useSelector((state) => state.settings)
-    
-    useEffect(()=>{
-        console.log('Something changed...')
-    }, [parameters.m])
 
     const P5Canvas = () => {
         const canvasRef = useRef();
@@ -75,7 +71,7 @@ function Canvas(){
                     let amplitude = parameters.scalingFactor;
                     let angleRadians = angle * p.PI/180;
 
-                    for(let t=0; t <= 360; t += 1){
+                    for(let t=0; t <= parameters.iterations; t += 1){
                         points.push(p.createVector(
                             amplitude * p.sin(n * t * angleRadians) * p.sin(m * t * angleRadians), 
                             amplitude * p.cos(n * t * angleRadians) * p.sin(m * t * angleRadians)
@@ -86,7 +82,7 @@ function Canvas(){
                 p.draw = () => {
                     p.translate(p.width/2, p.height/2);
                     p.background(parameters.background);
-                    p.stroke(parameters.fill);
+                    p.stroke(parameters.stroke);
                     p.strokeWeight(2);
 
                     const drawLines = (fp) => {
