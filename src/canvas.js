@@ -4,6 +4,7 @@ import p5 from 'p5';
 
 function Canvas(){
     const parameters = useSelector((state) => state.settings)
+    
     useEffect(()=>{
         console.log('Something changed...')
     }, [parameters.m])
@@ -11,9 +12,19 @@ function Canvas(){
     const P5Canvas = () => {
         const canvasRef = useRef();
         useEffect(() => {
+
+            // Compute dimensions of canvas area
+            const calculateDimensions = () => {
+                const canvasArea = document.querySelector('.canvas-area');
+                const width = canvasArea ? canvasArea.offsetWidth : window.innerWidth;
+                const height = window.innerHeight;
+                return { width, height };
+            }
+
             const sketch = (p) => {
                 p.setup = () => {
-                    p.createCanvas(800, 800);
+                    const { width, height } = calculateDimensions();
+                    p.createCanvas(width, height);
                     p.background(parameters.background);
                 };
 
@@ -28,7 +39,7 @@ function Canvas(){
     }
 
     return(
-        <div className="col-md-9">
+        <div className="col-md-9 p-0 canvas-area">
             <P5Canvas />
         </div>
     );
